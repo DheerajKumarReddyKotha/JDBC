@@ -12,7 +12,7 @@ import java.sql.Statement;
  */
 public class JDBC {
     public static void main(String[] args) throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "Ammanana143");
+        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "HR", "hr");
 
         System.out.println("Connection established successfully");
 //        Statement statement = conn.createStatement();
