@@ -15,19 +15,34 @@ public class JDBC {
         Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "HR", "hr");
 
         System.out.println("Connection established successfully");
-//        Statement statement = conn.createStatement();
-//        ResultSet resultset = statement.execute("select ");
-
+        Statement statement = conn.createStatement();
+        ResultSet resultset = statement.executeQuery("select * from Employees");
+        while(resultset.next()){
+        	System.out.println("The first name is: "+resultset.getString("FIRST_NAME"));
+        	System.out.println("The firstname indes is: "+resultset.getInt(1));
+        }
         
     }
 }
 /*
 Notes:
-1. JDBC is an API that provides connectivity between java application and database.
-2. JDBC Driver class converts java calls to database and database calls to java.
-3. These drivers are different for different databases.
-4. Statement object is used to carry the query from java application to database.
-5. The output after executing statement object is known as result, which is a result set.
+The javax namespace is usually (that's a loaded word) used for standard extensions, currently known as optional packages.
+
+1. The Java Database Connectivity (JDBC) API provides universal data access from the Java programming language.
+2.  Using the JDBC API, you can access virtually any data source, from relational databases to spreadsheets and flat files.
+
+The JDBC API is comprised in two packages:
+a) java.sql
+b) javax.sql
+
+3. A JDBC driver is a software component enabling a Java application to interact with a database.
+4. Driver Manager class is a service that manages the set of JDBC drivers. It loads the registered Drivers in class path while initializing the class.
+5. From JDK 8, it loads the suitable driver while creating connection according to jdbc url provided.
+6. The DriverManager attempts to select an appropriate driver from the set of registered JDBC drivers to establish a connection.
+7. Connection object is created using getConnection method with the jdbc url provided.
+8. The statement object is created using the connection object to send SQL statements to database.
+9. The Result set is an object which is obtained after executing the query.
+
 
 SETUP:
 Step 1: Load an Register JDBC Driver
@@ -53,9 +68,9 @@ while(rs.next()){
 Step 6: Close the connection
 conn.close();
 
-Driver Manager: This class keeps track of the list of drivers available and handles establishing connection between database and appropriate driver.
-Driver:  This interface handles the communications with the database server. 
-Statement: It is an object to carry information to the database
-Resultset: It is an object which holds the data retreived from the database.
+10. Result set is initially placed before first row in the table.
+11. resultset.next() is used to check whether the rows are present, it moves one row forward in the result set obtained.
+12. We can read the data using getter methods with column name specified in it or the one-based index.
+13. 
 
 */
